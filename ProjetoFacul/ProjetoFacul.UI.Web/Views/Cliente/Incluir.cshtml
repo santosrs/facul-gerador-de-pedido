@@ -1,0 +1,73 @@
+﻿@model ProjetoFacul.Models.Cliente
+
+@{
+    ViewBag.Title = "Incluir";
+}
+
+<h2>Incluir</h2>
+
+
+<form method="post" form="form-horizontal">
+
+    @Html.ValidationSummary(null, new { @class = "text-danger" })
+
+    <div class="form-group">
+        <label class="control-label" for=" Nome">Nome:</label>
+        <input class="form-control" type="text" name="Nome" />
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" for=" Telefone">Telefone:</label>        
+        @Html.EditorFor(model =>model.Telefone, new { htmlAttributes = new {@class="form-control"}})
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" for="Celular">Celular:</label>
+        <input class="form-control" type="text" name="Celular" />
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" for=" Email">Email:</label>
+        <input class="form-control" type="text" name="Email" />
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" for="Endereco">Endereco:</label>
+        <input class="form-control" type="text" name="Endereco" />
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" for="Numero">Numero:</label>
+        <input class="form-control" type="text" name="Numero" />
+    </div>
+
+
+
+    <div class="form-group">
+        <label class="control-label" for="Complemento">Complemento:</label>
+        <input class="form-control" type="text" name="Complemento" />
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" for="Cep">Cep:</label>
+        <input class="form-control" type="text" name="Cep" />
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" for="Cidade">Cidade:</label>
+        <input class="form-control" type="text" name="Cidade" />
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" for="UF">UF:</label>
+        <input class="form-control" type="text" name="UF" />
+    </div>
+
+
+    <div class="form-group">
+        <input class="btn btn-default" type="submit" name="Gravar" />
+    </div>
+
+</form>
+
+

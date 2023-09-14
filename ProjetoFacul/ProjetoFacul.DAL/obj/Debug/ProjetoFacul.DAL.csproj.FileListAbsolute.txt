@@ -1,0 +1,9 @@
+C:\workspace1\ProjetoFacul\ProjetoFacul.DAL\bin\Debug\ProjetoFacul.DAL.dll
+C:\workspace1\ProjetoFacul\ProjetoFacul.DAL\bin\Debug\ProjetoFacul.DAL.pdb
+C:\workspace1\ProjetoFacul\ProjetoFacul.DAL\bin\Debug\ProjetoFacul.Models.dll
+C:\workspace1\ProjetoFacul\ProjetoFacul.DAL\bin\Debug\ProjetoFacul.Models.pdb
+C:\workspace1\ProjetoFacul\ProjetoFacul.DAL\obj\Debug\ProjetoFacul.DAL.csproj.AssemblyReference.cache
+C:\workspace1\ProjetoFacul\ProjetoFacul.DAL\obj\Debug\ProjetoFacul.DAL.csproj.CoreCompileInputs.cache
+C:\workspace1\ProjetoFacul\ProjetoFacul.DAL\obj\Debug\ProjetoFacul.DAL.csproj.CopyComplete
+C:\workspace1\ProjetoFacul\ProjetoFacul.DAL\obj\Debug\ProjetoFacul.DAL.dll
+C:\workspace1\ProjetoFacul\ProjetoFacul.DAL\obj\Debug\ProjetoFacul.DAL.pdb
