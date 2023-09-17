@@ -10,28 +10,49 @@ namespace ProjetoFacul.BLL
 {
     public class ClienteBLL : IClienteDados
     {
+        private ClienteDAL dal;
+
+        public ClienteBLL()
+        {
+            this.dal = new ClienteDAL();
+        }
         public void Alterar(Cliente cliente)
         {
-            throw new NotImplementedException();
+            Validar(cliente);
+            if (string.IsNullOrEmpty(cliente.Id))
+            {
+                throw new Exception("O id deve ser informado");
+            }
+
+            dal.Alterar(cliente);
         }
 
         public void Excluir(string Id)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(Id))
+            {
+                throw new Exception("O id deve ser informado");
+            }
+            dal.Excluir(Id);
         }
 
         public void Incluir(Cliente cliente)
         {
-            if(string.IsNullOrEmpty(cliente.Nome))
+            Validar(cliente);
+            if (string.IsNullOrEmpty(cliente.Id))
+            {
+                cliente.Id = Guid.NewGuid().ToString();
+            }
+
+            dal.Incluir(cliente);
+        }
+
+        private static void Validar(Cliente cliente)
+        {
+            if (string.IsNullOrEmpty(cliente.Nome))
             {
                 throw new ApplicationException("O nome deve ser informado");
             }
-            if(string.IsNullOrEmpty(cliente.Id))
-            { 
-                cliente.Id = Guid.NewGuid().ToString();
-            }
-            var dal = new ClienteDAL();
-            dal.Incluir(cliente);
         }
 
         public Cliente ObterPorEmail(string email)
@@ -41,12 +62,13 @@ namespace ProjetoFacul.BLL
 
         public Cliente ObterPorId(string id)
         {
-            throw new NotImplementedException();
+            return dal.ObterPorId(id);
         }
 
         public List<Cliente> ObterTodos()
         {
-            throw new NotImplementedException();
+            var lista = dal.ObterTodos();
+            return lista;
         }
     }
 }
