@@ -45,6 +45,7 @@
     <Compile Include="Empresa.cs" />
     <Compile Include="FormaPagamentoEnum.cs" />
     <Compile Include="IClienteDados.cs" />
+    <Compile Include="IProdutoDados.cs" />
     <Compile Include="Pedido.cs" />
     <Compile Include="Pessoa.cs" />
     <Compile Include="PessoaFisicaJuridica.cs" />

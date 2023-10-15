@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="ClienteDAL.cs" />
     <Compile Include="DbHelper.cs" />
+    <Compile Include="ProdutoDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

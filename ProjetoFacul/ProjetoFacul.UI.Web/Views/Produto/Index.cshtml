@@ -1,0 +1,37 @@
+﻿@model IEnumerable<ProjetoFacul.Models.Produto>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Produtos</h2>
+
+<a class="btn btn-info" href="/Produto/Incluir">Novo</a>
+
+
+<table class="table">
+    <tr>
+        <th>Nome</th>
+        <th>Fornecedor</th>
+        <th>Preço</th>
+    </tr>
+
+    @foreach (var produto in Model)
+    {
+<tr>
+    <td>
+
+        @Html.ActionLink(produto.Nome, "Detalhes", new { id = produto.Id })
+
+    </td>
+    <td>
+        @produto.Fornecedor
+
+    </td>
+    <td>
+        @produto.Preco.ToString("c")
+
+    </td>
+</tr>
+    }
+</table>

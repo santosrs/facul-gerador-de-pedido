@@ -12,6 +12,8 @@ namespace ProjetoFacul.Models
 
         public string Nome { get; set; }
 
+        public string Fornecedor { get; set; }
+
         public decimal Preco { get; set; }
 
         public int Estoque { get; set; }
