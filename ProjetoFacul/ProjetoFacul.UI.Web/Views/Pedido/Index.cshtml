@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ProjetoFacul.Models.Pedido>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .celula-botao {
+        width: 1%;
+        white-space: nowrap;
+        text-align: right;
+    }
+</style>
+
+
+<h2> Pedidos</h2>
+
+<p>
+    <a class="btn btn-success" href="/Pedido/Incluir"> <i class="glyphicon glyphicon-plus"> </i>Incluir Pedido</a>
+</p>
+
+<table class="table">
+    <tr>
+        <th> Id</th>
+        <th> Cliente</th>
+        <th> Data</th>
+        <th> </th>
+    </tr>
+    @foreach (var pedido in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(pedido.Id.ToString(), "Detalhes", new { id = pedido.Id })
+            </td>
+            <td>
+                @Html.ActionLink(pedido.Cliente.Nome, "Detalhes", new { id = pedido.Id })
+            </td>
+            <td>@pedido.Data </td>
+            <td class="celula-botao">
+                <a href='@Url.Action("Detalhes", new { id = pedido.Id })' class="btn btn-primary btn_remover" role="button">
+                    <i class="glyphicon glyphicon-list-alt"> </i>
+                </a>
+                <a href='@Url.Action("Alterar", new { id = pedido.Id })' class="btn btn-info " role="button">
+                    <i class="glyphicon glyphicon-pencil"> </i>
+                </a>
+                <a href='@Url.Action("Excluir", new { id = pedido.Id })' class="btn btn-warning btn_remover" role="button">
+                    <i class="glyphicon glyphicon-trash"> </i>
+                </a>
+            </td>
+
+        </tr>
+    }
+</table>
+
+

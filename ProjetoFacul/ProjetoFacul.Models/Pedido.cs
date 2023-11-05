@@ -8,11 +8,15 @@ namespace ProjetoFacul.Models
 {
     public class Pedido
     {
+        public Pedido()
+        {
+            this.Items = new List<Item>();
+        }
+
         public int Id { get; set; }
         public DateTime Data { get; set;}
         public Cliente Cliente { get; set;}
-        public List<Item> Itens { get; set; }
-        public List<End> Ends { get; set; }
+        public List<Item> Items { get; set; }
         public FormaPagamentoEnum FormaPagamento { get; set; }
         public class Item
         {
@@ -22,15 +26,7 @@ namespace ProjetoFacul.Models
             public decimal Preco { get; set; }
 
         }
-        public class End
-        {
-            public string Endereco { get; set; }
-            public string Numero { get; set; }
-            public string Complemento { get; set; }
-            public string Cep { get; set; }
-            public string Cidade { get; set; }
-            public string UF { get; set; }
-        }
+        
 
     }
 }

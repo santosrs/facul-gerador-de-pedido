@@ -48,6 +48,12 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Common, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.Common.4.3.0\lib\net451\System.Data.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SqlClient, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SqlClient.4.1.0\lib\net451\System.Data.SqlClient.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -117,15 +123,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Code\AppContainer.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PedidoController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\PedidoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -172,10 +181,14 @@
     <Content Include="Views\Produto\Excluir.cshtml" />
     <Content Include="Views\Produto\Alterar.cshtml" />
     <Content Include="Views\Produto\Detalhes.cshtml" />
+    <Content Include="Views\Pedido\Detalhes.cshtml" />
+    <Content Include="Views\Pedido\Alterar.cshtml" />
+    <Content Include="Views\Pedido\Index.cshtml" />
+    <Content Include="Views\Pedido\Incluir.cshtml" />
+    <Content Include="Views\Pedido\Excluir.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -194,6 +207,10 @@
     <ProjectReference Include="..\ProjetoFacul.BLL\ProjetoFacul.BLL.csproj">
       <Project>{BA9D39D6-3210-40F8-A597-56039C51386F}</Project>
       <Name>ProjetoFacul.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProjetoFacul.DAL\ProjetoFacul.DAL.csproj">
+      <Project>{28c121b5-fd96-450a-9b5e-55083a6542ad}</Project>
+      <Name>ProjetoFacul.DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\ProjetoFacul.Models\ProjetoFacul.Models.csproj">
       <Project>{fe3d9442-69c5-45dc-8f56-e7b262b2560a}</Project>

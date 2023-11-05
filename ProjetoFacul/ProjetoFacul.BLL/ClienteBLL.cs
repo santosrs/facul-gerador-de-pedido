@@ -10,12 +10,14 @@ namespace ProjetoFacul.BLL
 {
     public class ClienteBLL : IClienteDados
     {
-        private ClienteDAL dal;
+        private IClienteDados dal;
 
-        public ClienteBLL()
+        public ClienteBLL(IClienteDados clienteDados)
         {
-            this.dal = new ClienteDAL();
+            this.dal = clienteDados;
         }
+
+
         public void Alterar(Cliente cliente)
         {
             Validar(cliente);
@@ -23,7 +25,6 @@ namespace ProjetoFacul.BLL
             {
                 throw new Exception("O id deve ser informado");
             }
-
             dal.Alterar(cliente);
         }
 
@@ -34,6 +35,7 @@ namespace ProjetoFacul.BLL
                 throw new Exception("O id deve ser informado");
             }
             dal.Excluir(Id);
+
         }
 
         public void Incluir(Cliente cliente)
@@ -43,6 +45,7 @@ namespace ProjetoFacul.BLL
             {
                 cliente.Id = Guid.NewGuid().ToString();
             }
+
 
             dal.Incluir(cliente);
         }
@@ -57,7 +60,7 @@ namespace ProjetoFacul.BLL
 
         public Cliente ObterPorEmail(string email)
         {
-            throw new NotImplementedException();
+            return dal.ObterPorEmail(email);
         }
 
         public Cliente ObterPorId(string id)
@@ -68,6 +71,7 @@ namespace ProjetoFacul.BLL
         public List<Cliente> ObterTodos()
         {
             var lista = dal.ObterTodos();
+
             return lista;
         }
     }

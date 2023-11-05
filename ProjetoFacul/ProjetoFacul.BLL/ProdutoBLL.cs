@@ -11,27 +11,31 @@ namespace ProjetoFacul.BLL
     public class ProdutoBLL : IProdutoDados
 
     {
-        private ProdutoDAL dal;
-
-        public ProdutoBLL()
+        private IProdutoDados dal;
+        public ProdutoBLL(IProdutoDados produtosDados)
         {
-            this.dal = new ProdutoDAL();
+            this.dal = produtosDados;
         }
+        public void Validar(Produto produto)
+        {
+            if (String.IsNullOrEmpty(produto.Nome))
+            {
+                throw new Exception("O nome deve ser informado");
+            }
+            if (produto.Preco < 0)
+            {
+                throw new Exception("o preco deve ser maior ou igual a zero");
+            }
+        }
+
         public void Alterar(Produto produto)
         {
-            if (string.IsNullOrEmpty(produto.Id))
-            {
-                throw new Exception("O id deve ser informado");
-            }
+            Validar(produto);
             dal.Alterar(produto);
         }
 
         public void Excluir(string Id)
         {
-            if (string.IsNullOrEmpty(Id))
-            {
-                throw new Exception("O id deve ser informado");
-            }
             dal.Excluir(Id);
         }
 
@@ -42,7 +46,6 @@ namespace ProjetoFacul.BLL
             {
                 produto.Id = Guid.NewGuid().ToString();
             }
-
             dal.Incluir(produto);
         }
 
@@ -53,25 +56,7 @@ namespace ProjetoFacul.BLL
 
         public List<Produto> ObterTodos()
         {
-            var lista = dal.ObterTodos();
-            return lista;
-        }
-        private static void Validar(Produto produto)
-        {
-            if (string.IsNullOrEmpty(produto.Nome))
-            {
-                throw new ApplicationException("O nome deve ser informado");
-            }
-        }
-        private static Produto ObterClienteReader(System.Data.IDataReader reader)
-        {
-            var produto = new Produto();
-            produto.Id = reader["Id"].ToString();
-            produto.Nome = reader["Nome"].ToString();
-            produto.Fornecedor = reader["Fornecedor"].ToString();
-            produto.Preco = Convert.ToDecimal(reader["Preco"]);
-            produto.Estoque = Convert.ToInt32(reader["Estoque"]);
-            return produto;
+            return dal.ObterTodos();
         }
     }
 }

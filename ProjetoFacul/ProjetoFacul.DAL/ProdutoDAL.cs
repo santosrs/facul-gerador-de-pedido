@@ -51,7 +51,7 @@ namespace ProjetoFacul.DAL
             {
                 if (reader.Read())
                 {
-                    produto = ObterClienteReader(reader);
+                    produto = ObterProdutoReader(reader);
 
                 }
             }
@@ -65,7 +65,7 @@ namespace ProjetoFacul.DAL
             {
                 while (reader.Read())
                 {
-                    Produto produto = ObterClienteReader(reader);
+                    Produto produto = ObterProdutoReader(reader);
 
                     lista.Add(produto);
                 }
@@ -73,7 +73,7 @@ namespace ProjetoFacul.DAL
             return lista;
         }
 
-        private static Produto ObterClienteReader(System.Data.IDataReader reader)
+        private static Produto ObterProdutoReader(System.Data.IDataReader reader)
         {
             var produto = new Produto();
             produto.Id = reader["Id"].ToString();

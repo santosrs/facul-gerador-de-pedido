@@ -10,12 +10,16 @@ namespace ProjetoFacul.UI.Web.Controllers
 {
     public class ProdutoController : Controller
     {
-        private ProdutoBLL bll;
+        private IProdutoDados bll;
 
+        //
+        // Construtor
+        //
         public ProdutoController()
         {
-            bll = new ProdutoBLL();
+            bll = AppContainer.ObterProdutoBLL();
         }
+
         public ActionResult Excluir(string id)
         {
             var produto = bll.ObterPorId(id);

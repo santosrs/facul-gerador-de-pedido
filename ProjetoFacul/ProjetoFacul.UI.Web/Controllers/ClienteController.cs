@@ -1,20 +1,16 @@
-﻿using ProjetoFacul.BLL;
-using ProjetoFacul.Models;
+﻿using ProjetoFacul.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ProjetoFacul.UI.Web.Controllers
 {
     public class ClienteController : Controller
     {
-        private ClienteBLL bll;
+        private IClienteDados bll;
 
         public ClienteController()
         {
-            bll = new ClienteBLL();
+            bll = AppContainer.ObterClienteBLL();
         }
 
 
