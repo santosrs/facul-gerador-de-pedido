@@ -128,8 +128,10 @@
 }
 
 <div>
-    @Html.ActionLink("Alterar", "Alterar", new { Id = Model.Id })
-    @Html.ActionLink("Excluir", "Excluir", new { Id = Model.Id })
+    <hr />
+    <a href="/Pedido/Index" class="btn btn-info"><i class="glyphicon glyphicon-refresh"> </i> Voltar</a>
+    <a href="/Pedido/Alterar/@Model.Id" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"> </i> Alterar</a>
+    <a href="/Pedido/Excluir/@Model.Id" class="btn btn-danger"><i class="glyphicon glyphicon-trash"> </i> Excluir</a>
 </div>
 
 

@@ -1,4 +1,5 @@
 ﻿using ProjetoFacul.Models;
+using ProjetoFacul.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,77 +13,33 @@ namespace ProjetoFacul.DAL
     {
         public void Alterar(Produto produto)
         {
-            DbHelper.ExecuteNonQuery("ProdutoAlterar",
-                "@Id", produto.Id,
-                "@Nome", produto.Nome,
-                "@Fornecedor", produto.Fornecedor,
-                "@Preco", produto.Preco,
-                "@Estoque", produto.Estoque
-
-
-                );
+            Db.Execute("ProdutoAlterar", produto);
         }
 
-        public void Excluir(string Id)
+        public void Excluir(string id)
         {
-            DbHelper.ExecuteNonQuery("ProdutoExcluir", "@Id", Id);
-
-
-                
+            Db.Execute("ProdutoExcluir", new { Id = id });
         }
 
         public void Incluir(Produto produto)
         {
-            DbHelper.ExecuteNonQuery("ProdutoIncluir",
-                "@Id", produto.Id,
-                "@Nome", produto.Nome,
-                "@Fornecedor", produto.Fornecedor,
-                "@Preco", produto.Preco,
-                "@Estoque", produto.Estoque
-                
-
-                );
+            Db.Execute("ProdutoIncluir", produto);
         }
 
         public Produto ObterPorId(string id)
         {
-            Produto produto = null;
-            using (var reader = DbHelper.ExecuteReader("ProdutoObterPorId", "@Id", id))
-            {
-                if (reader.Read())
-                {
-                    produto = ObterProdutoReader(reader);
-
-                }
-            }
-            return produto;
+            return Db.QueryEntidade<Produto>("ProdutoObterPorId", new { Id = id });
         }
 
-        public List<Produto> ObterTodos()
+        public IEnumerable<Produto> ObterTodos()
         {
-            var lista = new List<Produto>();
-            using (var reader = DbHelper.ExecuteReader("ProdutoListar"))
-            {
-                while (reader.Read())
-                {
-                    Produto produto = ObterProdutoReader(reader);
-
-                    lista.Add(produto);
-                }
-            }
-            return lista;
+            return Db.QueryColecao<Produto>("ProdutoListar", new { });
         }
 
-        private static Produto ObterProdutoReader(System.Data.IDataReader reader)
+        public IEnumerable<string> Validar()
         {
-            var produto = new Produto();
-            produto.Id = reader["Id"].ToString();
-            produto.Nome = reader["Nome"].ToString();
-            produto.Fornecedor = reader["Fornecedor"].ToString();
-            produto.Preco = Convert.ToDecimal(reader["Preco"]);
-            produto.Estoque = Convert.ToInt32(reader["Estoque"]);
-            
-            return produto;
+            throw new NotImplementedException();
         }
     }
 }
+

@@ -1,9 +1,11 @@
 ﻿using ProjetoFacul.Models;
+using ProjetoFacul.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dapper;
 
 namespace ProjetoFacul.DAL
 {
@@ -11,43 +13,34 @@ namespace ProjetoFacul.DAL
     {
         public void Alterar(Cliente cliente)
         {
-            DbHelper.ExecuteNonQuery("ClienteAlterar",
-                "@Id", cliente.Id,
-                "@Nome", cliente.Nome,
-                "@Telefone", cliente.Telefone,
-                "@Celular", cliente.Celular,
-                "@Email", cliente.Email,
-                "@Endereco", cliente.Endereco,
-                "@Numero", cliente.Numero,
-                "@Complemento", cliente.Complemento,
-                "@Cep", cliente.Cep,
-                "@Cidade", cliente.Cidade,
-                "@UF", cliente.UF
+            if (cliente is Empresa)
+            {
+                Db.Execute("ClienteEmpresaAlterar", cliente);
+            }
+            else
+            {
+                Db.Execute("ClientePessoaAlterar", cliente);
+            }
 
-                );
         }
 
-        public void Excluir(string Id)
+        public void Excluir(string id)
         {
-            DbHelper.ExecuteNonQuery("ClienteExcluir", "@Id", Id);
+            Db.Execute("ClienteExcluir", new { Id = id });
         }
 
         public void Incluir(Cliente cliente)
         {
-            DbHelper.ExecuteNonQuery("ClienteIncluir",
-                "@Id", cliente.Id,
-                "@Nome", cliente.Nome,
-                "@Telefone", cliente.Telefone,
-                "@Celular", cliente.Celular,
-                "@Email", cliente.Email,
-                "@Endereco", cliente.Endereco,
-                "@Numero", cliente.Numero,
-                "@Complemento", cliente.Complemento,
-                "@Cep", cliente.Cep,
-                "@Cidade", cliente.Cidade,
-                "@UF", cliente.UF
+            if (cliente is Empresa)
+            {
+                Db.Execute("ClienteEmpresaIncluir", cliente);
+            }
+            else
+            {
+                Db.Execute("ClientePessoaIncluir", cliente);
+            }
+               
 
-                );
         }
 
         public Cliente ObterPorEmail(string email)
@@ -57,48 +50,36 @@ namespace ProjetoFacul.DAL
 
         public Cliente ObterPorId(string id)
         {
-            Cliente cliente = null;
-            using (var reader = DbHelper.ExecuteReader("ClienteObterPorId", "@Id", id))
-            {
-                if (reader.Read())
-                {
-                    cliente = ObterClienteReader(reader);
+            var cliente = Db.QueryEntidade<Cliente>("ClienteObterPorId", new { Id = id });
 
-                }
+            if (cliente.Tipo == PessoaFisicaJuridica.PessoaJuridica)
+            {
+                var empresa = Db.QueryEntidade<Empresa>("ClienteObterPorId", new { Id = id });
+                return empresa;
             }
-            return cliente;
+            else
+            {
+                var pessoa = Db.QueryEntidade<Pessoa>("ClienteObterPorId", new { Id = id });
+                return pessoa;
+            }
         }
 
-        public List<Cliente> ObterTodos()
-        {
-            var lista = new List<Cliente>();
-            using (var reader = DbHelper.ExecuteReader("ClienteListar"))
-            {
-                while (reader.Read())
-                {
-                    Cliente cliente = ObterClienteReader(reader);
+        
 
-                    lista.Add(cliente);
-                }
-            }
-            return lista;
+        public IEnumerable<Cliente> ObterTodos()
+        {
+            return Db.QueryColecao<Cliente>("ClienteListar", new {  });
         }
 
-        private static Cliente ObterClienteReader(System.Data.IDataReader reader)
+        
+
+        public IEnumerable<string> Validar()
         {
-            var cliente = new Cliente();
-            cliente.Id = reader["Id"].ToString();
-            cliente.Nome = reader["Nome"].ToString();            
-            cliente.Telefone = reader["Telefone"].ToString();
-            cliente.Celular = reader["Celular"].ToString();
-            cliente.Email = reader["Email"].ToString();
-            cliente.Endereco = reader["Endereco"].ToString();
-            cliente.Numero = reader["Numero"].ToString();
-            cliente.Complemento = reader["Complemento"].ToString();
-            cliente.Cep = reader["Cep"].ToString();
-            cliente.Cidade = reader["Cidade"].ToString();
-            cliente.UF = reader["UF"].ToString();
-            return cliente;
+            throw new NotImplementedException();
         }
     }
+
+     
 }
+
+  

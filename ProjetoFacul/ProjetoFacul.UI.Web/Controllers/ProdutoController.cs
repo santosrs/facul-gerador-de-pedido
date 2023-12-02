@@ -1,5 +1,7 @@
 ﻿using ProjetoFacul.BLL;
 using ProjetoFacul.Models;
+using ProjetoFacul.Models.Interfaces;
+using ProjetoFacul.UI.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +21,7 @@ namespace ProjetoFacul.UI.Web.Controllers
         {
             bll = AppContainer.ObterProdutoBLL();
         }
-
+        [Authorize]
         public ActionResult Excluir(string id)
         {
             var produto = bll.ObterPorId(id);
@@ -49,6 +51,7 @@ namespace ProjetoFacul.UI.Web.Controllers
         //
         // Alterar
         //
+        [Authorize]
         public ActionResult Alterar(string id)
         {
             var produto = bll.ObterPorId(id);
@@ -79,12 +82,13 @@ namespace ProjetoFacul.UI.Web.Controllers
         //
         // Detalhes
         //
+        [Authorize]
         public ActionResult Detalhes(string id)
         {
             var produto = bll.ObterPorId(id);
             return View(produto);
         }
-
+        [Authorize]
         // GET: Produto
         public ActionResult Incluir()
         {
@@ -106,6 +110,7 @@ namespace ProjetoFacul.UI.Web.Controllers
                 return View(produto);
             }
         }
+        [Authorize]
         public ActionResult Index()
         {
             var lista = bll.ObterTodos();

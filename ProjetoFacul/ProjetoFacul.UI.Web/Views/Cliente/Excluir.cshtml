@@ -93,12 +93,13 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Excluir" class="btn btn-danger" /> |
-            @Html.ActionLink("Voltar", "Index")
+            <a href="/Cliente/Index" class="btn btn-danger"><i class="glyphicon glyphicon-trash"> </i> Excluir</a>
+            <a href="/Cliente/Index" class="btn btn-info"><i class="glyphicon glyphicon-refresh"> </i> Voltar</a>
         </div>
     }
 </div>

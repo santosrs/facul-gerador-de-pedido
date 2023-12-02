@@ -1,5 +1,5 @@
 ﻿using ProjetoFacul.Models;
-using ProjetoFacul.DAL;
+using ProjetoFacul.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,36 +16,37 @@ namespace ProjetoFacul.BLL
         {
             this.dal = produtosDados;
         }
-        public void Validar(Produto produto)
-        {
-            if (String.IsNullOrEmpty(produto.Nome))
-            {
-                throw new Exception("O nome deve ser informado");
-            }
-            if (produto.Preco < 0)
-            {
-                throw new Exception("o preco deve ser maior ou igual a zero");
-            }
-        }
+        
 
         public void Alterar(Produto produto)
         {
-            Validar(produto);
+            Confirmar(produto);
+            if (string.IsNullOrEmpty(produto.Id))
+            {
+                throw new Exception("O id deve ser informado");
+            }
+
             dal.Alterar(produto);
+
         }
 
-        public void Excluir(string Id)
+        public void Excluir(string id)
         {
-            dal.Excluir(Id);
+            if (string.IsNullOrEmpty(id))
+            {
+                throw new Exception("O id deve ser informado");
+            }
+            dal.Excluir(id);
         }
 
         public void Incluir(Produto produto)
         {
-            Validar(produto);
+            Confirmar(produto);
             if (string.IsNullOrEmpty(produto.Id))
             {
                 produto.Id = Guid.NewGuid().ToString();
             }
+
             dal.Incluir(produto);
         }
 
@@ -54,9 +55,24 @@ namespace ProjetoFacul.BLL
             return dal.ObterPorId(id);
         }
 
-        public List<Produto> ObterTodos()
+        
+
+        public IEnumerable<Produto> ObterTodos()
         {
-            return dal.ObterTodos();
+            var lista = dal.ObterTodos();
+            return lista;
+        }
+
+        public IEnumerable<string> Validar()
+        {
+            throw new NotImplementedException();
+        }
+        private static void Confirmar(Produto produto)
+        {
+            if (string.IsNullOrEmpty(produto.Nome))
+            {
+                throw new ApplicationException("O nome deve ser informado");
+            }
         }
     }
 }

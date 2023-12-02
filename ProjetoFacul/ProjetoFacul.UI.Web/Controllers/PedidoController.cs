@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ProjetoFacul.UI.Web.Models;
+using ProjetoFacul.Models.Interfaces;
 
 namespace ProjetoFacul.UI.Web.Controllers
 {
@@ -17,7 +18,7 @@ namespace ProjetoFacul.UI.Web.Controllers
             bll = AppContainer.ObterPedidoBLL();
         }
 
-
+        [Authorize]
         public ActionResult Detalhes(int id)
         {
             var pedido = bll.ObterPorId(id);
@@ -26,9 +27,9 @@ namespace ProjetoFacul.UI.Web.Controllers
             var bllProduto = AppContainer.ObterProdutoBLL();
             var bllCliente = AppContainer.ObterClienteBLL();
 
-            pedidoViewModel.Clientes = bllCliente.ObterTodos();
+            pedidoViewModel.Clientes = (List<Cliente>)bllCliente.ObterTodos();
 
-            pedidoViewModel.Produtos = bllProduto.ObterTodos();
+            pedidoViewModel.Produtos = (List<Produto>)bllProduto.ObterTodos();
             pedidoViewModel.Produtos.Insert(0, new Produto() { Id = string.Empty, Nome = string.Empty });
 
             pedidoViewModel.FormasPagamento = Enum.GetNames(typeof(FormaPagamentoEnum)).ToList();
@@ -36,7 +37,7 @@ namespace ProjetoFacul.UI.Web.Controllers
             return View(pedidoViewModel);
         }
 
-
+        [Authorize]
         public ActionResult Alterar(int id)
         {
             var pedido = bll.ObterPorId(id);
@@ -45,9 +46,9 @@ namespace ProjetoFacul.UI.Web.Controllers
             var bllProduto = AppContainer.ObterProdutoBLL();
             var bllCliente = AppContainer.ObterClienteBLL();
 
-            pedidoViewModel.Clientes = bllCliente.ObterTodos();
+            pedidoViewModel.Clientes = (List<Cliente>)bllCliente.ObterTodos();
 
-            pedidoViewModel.Produtos = bllProduto.ObterTodos();
+            pedidoViewModel.Produtos = (List<Produto>)bllProduto.ObterTodos();
             pedidoViewModel.Produtos.Insert(0, new Produto() { Id = string.Empty, Nome = string.Empty });
 
             pedidoViewModel.FormasPagamento = Enum.GetNames(typeof(FormaPagamentoEnum)).ToList();
@@ -63,9 +64,9 @@ namespace ProjetoFacul.UI.Web.Controllers
             var bllCliente = AppContainer.ObterClienteBLL();
 
 
-            pedido.Clientes = bllCliente.ObterTodos();
+            pedido.Clientes = (List<Cliente>)bllCliente.ObterTodos();
 
-            pedido.Produtos = bllProduto.ObterTodos();
+            pedido.Produtos = (List<Produto>)bllProduto.ObterTodos();
             pedido.Produtos.Insert(0, new Produto() { Id = string.Empty, Nome = string.Empty });
 
             pedido.FormasPagamento = Enum.GetNames(typeof(FormaPagamentoEnum)).ToList();
@@ -90,12 +91,13 @@ namespace ProjetoFacul.UI.Web.Controllers
             return View(pedido);
 
         }
-
+        [Authorize]
         public ActionResult Index()
         {
             var lista = bll.ObterTodos();
             return View(lista);
         }
+        [Authorize]
         public ActionResult Incluir()
         {
             var bllCliente = AppContainer.ObterClienteBLL();
@@ -103,9 +105,9 @@ namespace ProjetoFacul.UI.Web.Controllers
 
 
             var pedido = new PedidoViewModel();
-            pedido.Clientes = bllCliente.ObterTodos();
+            pedido.Clientes = (List<Cliente>)bllCliente.ObterTodos();
 
-            pedido.Produtos = bllProduto.ObterTodos();
+            pedido.Produtos = (List<Produto>)bllProduto.ObterTodos();
             pedido.Produtos.Insert(0, new Produto() { Id = string.Empty, Nome = string.Empty });
 
             pedido.NovoItemProdutoId = string.Empty;
@@ -124,9 +126,10 @@ namespace ProjetoFacul.UI.Web.Controllers
             var bllCliente = AppContainer.ObterClienteBLL();
 
 
-            pedido.Clientes = bllCliente.ObterTodos();
+            pedido.Clientes = (List<Cliente>)bllCliente.ObterTodos();
 
-            pedido.Produtos = bllProduto.ObterTodos();
+            pedido.Produtos = (List<Produto>)bllProduto.ObterTodos();
+
             pedido.Produtos.Insert(0, new Produto() { Id = string.Empty, Nome = string.Empty });
 
             pedido.FormasPagamento = Enum.GetNames(typeof(FormaPagamentoEnum)).ToList();
@@ -238,7 +241,7 @@ namespace ProjetoFacul.UI.Web.Controllers
                 }
             }
         }
-
+        [Authorize]
         public ActionResult Excluir(int Id)
         {
             var pedido = bll.ObterPorId(Id);
@@ -249,20 +252,20 @@ namespace ProjetoFacul.UI.Web.Controllers
 
         public ActionResult Excluir(int Id, FormCollection form)
         {
-             try
-             {
-                    bll.Excluir(Id);
-                    return RedirectToAction("Index");
-             }
-             catch (Exception ex)
-             {
-                    ModelState.AddModelError(string.Empty, ex.Message);
-                    var pedido = bll.ObterPorId(Id);
-                    return View(pedido);
+            try
+            {
+                bll.Excluir(Id);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                var pedido = bll.ObterPorId(Id);
+                return View(pedido);
 
-             }
+            }
         }
-        
+
 
 
     }

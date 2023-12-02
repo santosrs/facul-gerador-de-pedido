@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace ProjetoFacul.BLL
 {
     public class ClienteBLL : IClienteDados
@@ -16,15 +17,14 @@ namespace ProjetoFacul.BLL
         {
             this.dal = clienteDados;
         }
-
-
         public void Alterar(Cliente cliente)
         {
-            Validar(cliente);
+            Confirmar(cliente);
             if (string.IsNullOrEmpty(cliente.Id))
             {
                 throw new Exception("O id deve ser informado");
             }
+
             dal.Alterar(cliente);
         }
 
@@ -35,22 +35,20 @@ namespace ProjetoFacul.BLL
                 throw new Exception("O id deve ser informado");
             }
             dal.Excluir(Id);
-
         }
 
         public void Incluir(Cliente cliente)
         {
-            Validar(cliente);
+            Confirmar(cliente);
             if (string.IsNullOrEmpty(cliente.Id))
             {
                 cliente.Id = Guid.NewGuid().ToString();
             }
 
-
             dal.Incluir(cliente);
         }
 
-        private static void Validar(Cliente cliente)
+        private static void Confirmar(Cliente cliente)
         {
             if (string.IsNullOrEmpty(cliente.Nome))
             {
@@ -60,7 +58,7 @@ namespace ProjetoFacul.BLL
 
         public Cliente ObterPorEmail(string email)
         {
-            return dal.ObterPorEmail(email);
+            throw new NotImplementedException();
         }
 
         public Cliente ObterPorId(string id)
@@ -68,11 +66,18 @@ namespace ProjetoFacul.BLL
             return dal.ObterPorId(id);
         }
 
-        public List<Cliente> ObterTodos()
+       
+        public IEnumerable<Cliente> ObterTodos()
         {
             var lista = dal.ObterTodos();
-
             return lista;
         }
+
+        public IEnumerable<string> Validar()
+        {
+            throw new NotImplementedException();
+        }
+
+        
     }
 }

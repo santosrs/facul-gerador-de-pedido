@@ -18,7 +18,7 @@ namespace ProjetoFacul.Models
         public string Complemento { get; set; }
         public string Cep { get; set; }
         public string Cidade { get; set; }
-        public string UF { get; set; }
+        public string UF { get; set; }        
         public PessoaFisicaJuridica Tipo { get; set; }
 
     }

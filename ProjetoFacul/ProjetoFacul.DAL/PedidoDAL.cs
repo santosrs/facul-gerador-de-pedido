@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
+using ProjetoFacul.Models.Interfaces;
 
 namespace ProjetoFacul.DAL
 {
@@ -238,6 +239,11 @@ namespace ProjetoFacul.DAL
         public void Excluir(int Id)
         {
             DbHelper.ExecuteNonQuery("PedidoExcluir", "@Id", Id);
+        }
+
+        public IEnumerable<string> Validar()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -6,7 +6,9 @@
 
 <h2>Produtos</h2>
 
-<a class="btn btn-info" href="/Produto/Incluir">Novo</a>
+<p>
+    <a class="btn btn-success" href="/Produto/Incluir"> <i class="glyphicon glyphicon-plus"> </i>Incluir Produto</a>
+</p>
 
 
 <table class="table">
@@ -18,20 +20,20 @@
 
     @foreach (var produto in Model)
     {
-<tr>
-    <td>
+        <tr>
+            <td>
 
-        @Html.ActionLink(produto.Nome, "Detalhes", new { id = produto.Id })
+                @Html.ActionLink(produto.Nome, "Detalhes", new { id = produto.Id })
 
-    </td>
-    <td>
-        @produto.Fornecedor
+            </td>
+            <td>
+                @produto.Fornecedor
 
-    </td>
-    <td>
-        @produto.Preco.ToString("c")
+            </td>
+            <td>
+                @produto.Preco.ToString("c")
 
-    </td>
-</tr>
+            </td>
+        </tr>
     }
 </table>

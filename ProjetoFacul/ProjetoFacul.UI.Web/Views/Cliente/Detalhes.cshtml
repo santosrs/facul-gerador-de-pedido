@@ -17,7 +17,7 @@
         <dd>
             @Html.DisplayFor(model => model.Nome)
         </dd>
-
+                
         <dt>
             @Html.DisplayNameFor(model => model.Telefone)
         </dt>
@@ -93,7 +93,8 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Alterar", "Alterar", new { id = Model.Id }) |
-    @Html.ActionLink("Excluir", "Excluir", new { id = Model.Id }) |
-    @Html.ActionLink("Voltar", "Index")
+    <hr />
+    <a href="/Cliente/Index" class="btn btn-info"><i class="glyphicon glyphicon-refresh"> </i> Voltar</a>
+    <a href="/Cliente/Alterar/@Model.Id" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"> </i> Alterar</a>
+    <a href="/Cliente/Excluir/@Model.Id" class="btn btn-danger"><i class="glyphicon glyphicon-trash"> </i> Excluir</a>
 </p>

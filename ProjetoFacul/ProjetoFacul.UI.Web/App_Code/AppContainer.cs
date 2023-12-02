@@ -1,6 +1,7 @@
 ﻿using ProjetoFacul.BLL;
 using ProjetoFacul.DAL;
 using ProjetoFacul.Models;
+using ProjetoFacul.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,5 @@ namespace ProjetoFacul.UI.Web
             var bll = new PedidoBLL(dal);
             return bll;
         }
-
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ProjetoFacul.Models;
+using ProjetoFacul.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,8 +31,6 @@ namespace ProjetoFacul.BLL
             dal.Excluir(pedidoId);
         }
 
-
-
         public Pedido ObterPorId(int id)
         {
             return dal.ObterPorId(id);
@@ -41,5 +40,13 @@ namespace ProjetoFacul.BLL
         {
             return dal.ObterTodos();
         }
+
+
+
+        public IEnumerable<string> Validar()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
